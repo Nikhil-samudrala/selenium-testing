@@ -8,7 +8,7 @@ from pages.login_page import LoginPage
 
 @pytest.fixture(scope="class")
 def set_up(request, browser_type):
-    print("Running on brower : "+browser_type)
+    # print("Running on brower : "+browser_type)
     if browser_type == 'chrome':
         options = webdriver.ChromeOptions()
         options.add_experimental_option("detach", True)
@@ -17,6 +17,10 @@ def set_up(request, browser_type):
         driver = webdriver.Firefox()
     elif browser_type == 'edge':
         driver = webdriver.Edge()
+    else:
+        options = webdriver.ChromeOptions()
+        options.add_experimental_option("detach", True)
+        driver = webdriver.Chrome(options=options)
     driver.implicitly_wait(10)
     #driver = EventFiringWebDriver(driver, MyListner())
     request.cls.driver = driver
